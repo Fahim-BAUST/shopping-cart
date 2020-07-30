@@ -102,30 +102,52 @@
       })
 
       const phnRemoveBtn=document.getElementById("phnRemove-btn").addEventListener("click",function () {
+         removeBtn("phone-amount","subtotal-amount","total-amount","phone-quantity");
          
-         var phoneAmount=document.getElementById("phone-amount").innerText;
-         phoneAmount=parseFloat(phoneAmount);
-         var subtotal=document.getElementById("subtotal-amount").innerText;
-         subtotal=parseFloat(subtotal);
-         document.getElementById("subtotal-amount").innerText=subtotal-phoneAmount;
-         document.getElementById("total-amount").innerText=subtotal-phoneAmount;
-         document.getElementById("phone-quantity").value=0;
-         document.getElementById("phone-amount").innerText=0;
-
       })
 
       const caseRemoveBtn=document.getElementById("caseRemove-btn").addEventListener("click",function () {
-         
-         var phoneAmount=document.getElementById("case-amount").innerText;
-         phoneAmount=parseFloat(phoneAmount);
-         var subtotal=document.getElementById("subtotal-amount").innerText;
-         subtotal=parseFloat(subtotal);
-         document.getElementById("subtotal-amount").innerText=subtotal-phoneAmount;
-         document.getElementById("total-amount").innerText=subtotal-phoneAmount;
-         document.getElementById("case-quantity").value=0;
-         document.getElementById("case-amount").innerText=0;
-
+         removeBtn("case-amount","subtotal-amount","total-amount","case-quantity");
       })
+
+      
+
+      function increaseValue(id1,id2,id3,id4 ) {
+         const phoneQuantity=document.getElementById(id1).value;
+         const phoneQuantityNumber=parseFloat(phoneQuantity);
+         const phoneQuantityNumberTotal=phoneQuantityNumber+1;
+         document.getElementById(id1).value=phoneQuantityNumberTotal;
+
+         const phoneAmount=document.getElementById(id2).innerText;
+         const phoneAmountNumber=parseFloat(phoneAmount);
+         var phoneAmountNumberTotal;
+         if(id2=='phone-amount')
+         {
+             phoneAmountNumberTotal=1219*phoneQuantityNumberTotal;
+         }
+         else{
+            phoneAmountNumberTotal=59*phoneQuantityNumberTotal;
+         }
+         
+        
+         document.getElementById(id2).innerText=phoneAmountNumberTotal;
+
+         const subtotalAmount=document.getElementById(id3).innerText;
+         var subtotalAmountNumber=parseFloat(subtotalAmount);
+
+         if(id2=='phone-amount')
+         {
+            subtotalAmountNumber=subtotalAmountNumber+1219;
+         }
+         else{
+            subtotalAmountNumber=subtotalAmountNumber+59;
+         }
+         
+
+         document.getElementById(id3).innerText=subtotalAmountNumber;
+         document.getElementById(id4).innerText=subtotalAmountNumber;
+         
+      }
 
       function decreaseValue(id1,id2,id3,id4 ) {
          const phoneQuantity=document.getElementById(id1).value;
@@ -170,42 +192,20 @@
          
       }
 
-      function increaseValue(id1,id2,id3,id4 ) {
-         const phoneQuantity=document.getElementById(id1).value;
-         const phoneQuantityNumber=parseFloat(phoneQuantity);
-         const phoneQuantityNumberTotal=phoneQuantityNumber+1;
-         document.getElementById(id1).value=phoneQuantityNumberTotal;
-
-         const phoneAmount=document.getElementById(id2).innerText;
-         const phoneAmountNumber=parseFloat(phoneAmount);
-         var phoneAmountNumberTotal;
-         if(id2=='phone-amount')
-         {
-             phoneAmountNumberTotal=1219*phoneQuantityNumberTotal;
-         }
-         else{
-            phoneAmountNumberTotal=59*phoneQuantityNumberTotal;
-         }
+      //for remove icon
+      function removeBtn(id1,id2,id3,id4) {
          
-        
-         document.getElementById(id2).innerText=phoneAmountNumberTotal;
-
-         const subtotalAmount=document.getElementById(id3).innerText;
-         var subtotalAmountNumber=parseFloat(subtotalAmount);
-
-         if(id2=='phone-amount')
-         {
-            subtotalAmountNumber=subtotalAmountNumber+1219;
-         }
-         else{
-            subtotalAmountNumber=subtotalAmountNumber+59;
-         }
-         
-
-         document.getElementById(id3).innerText=subtotalAmountNumber;
-         document.getElementById(id4).innerText=subtotalAmountNumber;
-         
+         var phoneAmount=document.getElementById(id1).innerText;
+         phoneAmount=parseFloat(phoneAmount);
+         var subtotal=document.getElementById(id2).innerText;
+         subtotal=parseFloat(subtotal);
+         document.getElementById(id2).innerText=subtotal-phoneAmount;
+         document.getElementById(id3).innerText=subtotal-phoneAmount;
+         document.getElementById(id4).value=0;
+         document.getElementById(id1).innerText=0;
       }
+
+     
 
    </script>
 </body>
