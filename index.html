@@ -78,26 +78,24 @@
       </div>
    </section>
 
-
-
    <script>
 
       const plusBtnPhone = document.getElementById("increase-quantityPhn").addEventListener("click",function () {
-         increaseValue("phone-quantity","phone-amount","subtotal-amount","total-amount");
+         updateValue("phone-quantity","phone-amount","subtotal-amount","total-amount",true);
    
       })
 
       const plusBtnCase= document.getElementById("increase-quantityCase").addEventListener("click",function () {
-         increaseValue("case-quantity","case-amount","subtotal-amount","total-amount");
+         updateValue("case-quantity","case-amount","subtotal-amount","total-amount",true);
    
       })
 
       const minusBtnPhone = document.getElementById("decrease-quantityPhn").addEventListener("click",function () {
-         decreaseValue("phone-quantity","phone-amount","subtotal-amount","total-amount");
+         updateValue("phone-quantity","phone-amount","subtotal-amount","total-amount",false);
    
       })
       const minusBtnCase = document.getElementById("decrease-quantityCase").addEventListener("click",function () {
-         decreaseValue("case-quantity","case-amount","subtotal-amount","total-amount");
+         updateValue("case-quantity","case-amount","subtotal-amount","total-amount",false);
    
       })
 
@@ -110,49 +108,19 @@
          removeBtn("case-amount","subtotal-amount","total-amount","case-quantity");
       })
 
-      
-
-      function increaseValue(id1,id2,id3,id4 ) {
+      function updateValue(id1,id2,id3,id4,id5 ) {
          const phoneQuantity=document.getElementById(id1).value;
          const phoneQuantityNumber=parseFloat(phoneQuantity);
-         const phoneQuantityNumberTotal=phoneQuantityNumber+1;
-         document.getElementById(id1).value=phoneQuantityNumberTotal;
+         let phoneQuantityNumberTotal;
 
-         const phoneAmount=document.getElementById(id2).innerText;
-         const phoneAmountNumber=parseFloat(phoneAmount);
-         var phoneAmountNumberTotal;
-         if(id2=='phone-amount')
+         if(id5==true)
          {
-             phoneAmountNumberTotal=1219*phoneQuantityNumberTotal;
+            phoneQuantityNumberTotal=phoneQuantityNumber+1;
          }
          else{
-            phoneAmountNumberTotal=59*phoneQuantityNumberTotal;
+            phoneQuantityNumberTotal=phoneQuantityNumber-1;
          }
-         
-        
-         document.getElementById(id2).innerText=phoneAmountNumberTotal;
 
-         const subtotalAmount=document.getElementById(id3).innerText;
-         var subtotalAmountNumber=parseFloat(subtotalAmount);
-
-         if(id2=='phone-amount')
-         {
-            subtotalAmountNumber=subtotalAmountNumber+1219;
-         }
-         else{
-            subtotalAmountNumber=subtotalAmountNumber+59;
-         }
-         
-
-         document.getElementById(id3).innerText=subtotalAmountNumber;
-         document.getElementById(id4).innerText=subtotalAmountNumber;
-         
-      }
-
-      function decreaseValue(id1,id2,id3,id4 ) {
-         const phoneQuantity=document.getElementById(id1).value;
-         const phoneQuantityNumber=parseFloat(phoneQuantity);
-         const phoneQuantityNumberTotal=phoneQuantityNumber-1;
          if(phoneQuantityNumberTotal>=0)
          {
          document.getElementById(id1).value=phoneQuantityNumberTotal;
@@ -174,26 +142,40 @@
          const subtotalAmount=document.getElementById(id3).innerText;
          var subtotalAmountNumber=parseFloat(subtotalAmount);
 
-         if(id2=='phone-amount')
-         {
-            subtotalAmountNumber=subtotalAmountNumber-1219;
+         if(id5==true){
+
+               if(id2=='phone-amount')
+            {
+               subtotalAmountNumber=subtotalAmountNumber+1219;
+            }
+            else{
+               subtotalAmountNumber=subtotalAmountNumber+59;
+            }
+
          }
          else{
-            subtotalAmountNumber=subtotalAmountNumber-59;
+            if(id2=='phone-amount')
+            {
+               subtotalAmountNumber=subtotalAmountNumber-1219;
+            }
+            else{
+               subtotalAmountNumber=subtotalAmountNumber-59;
+            }
+
          }
-         
 
          document.getElementById(id3).innerText=subtotalAmountNumber;
          document.getElementById(id4).innerText=subtotalAmountNumber;
-         }
-         else{
-            document.getElementById(id1).value=0;
-         }
+      }
+      else
+      {
+         document.getElementById(id1).value=0;
+      }
          
       }
 
-      //for remove icon
-      function removeBtn(id1,id2,id3,id4) {
+       //for remove icon
+       function removeBtn(id1,id2,id3,id4) {
          
          var phoneAmount=document.getElementById(id1).innerText;
          phoneAmount=parseFloat(phoneAmount);
@@ -204,6 +186,89 @@
          document.getElementById(id4).value=0;
          document.getElementById(id1).innerText=0;
       }
+
+   
+      // function increaseValue(id1,id2,id3,id4 ) {
+      //    const phoneQuantity=document.getElementById(id1).value;
+      //    const phoneQuantityNumber=parseFloat(phoneQuantity);
+      //    const phoneQuantityNumberTotal=phoneQuantityNumber+1;
+      //    document.getElementById(id1).value=phoneQuantityNumberTotal;
+
+      //    const phoneAmount=document.getElementById(id2).innerText;
+      //    const phoneAmountNumber=parseFloat(phoneAmount);
+      //    var phoneAmountNumberTotal;
+      //    if(id2=='phone-amount')
+      //    {
+      //        phoneAmountNumberTotal=1219*phoneQuantityNumberTotal;
+      //    }
+      //    else{
+      //       phoneAmountNumberTotal=59*phoneQuantityNumberTotal;
+      //    }
+         
+        
+      //    document.getElementById(id2).innerText=phoneAmountNumberTotal;
+
+      //    const subtotalAmount=document.getElementById(id3).innerText;
+      //    var subtotalAmountNumber=parseFloat(subtotalAmount);
+
+      //    if(id2=='phone-amount')
+      //    {
+      //       subtotalAmountNumber=subtotalAmountNumber+1219;
+      //    }
+      //    else{
+      //       subtotalAmountNumber=subtotalAmountNumber+59;
+      //    }
+         
+
+      //    document.getElementById(id3).innerText=subtotalAmountNumber;
+      //    document.getElementById(id4).innerText=subtotalAmountNumber;
+         
+      // }
+
+      // function decreaseValue(id1,id2,id3,id4 ) {
+      //    const phoneQuantity=document.getElementById(id1).value;
+      //    const phoneQuantityNumber=parseFloat(phoneQuantity);
+      //    const phoneQuantityNumberTotal=phoneQuantityNumber-1;
+      //    if(phoneQuantityNumberTotal>=0)
+      //    {
+      //    document.getElementById(id1).value=phoneQuantityNumberTotal;
+
+      //    const phoneAmount=document.getElementById(id2).innerText;
+      //    const phoneAmountNumber=parseFloat(phoneAmount);
+      //    var phoneAmountNumberTotal;
+      //    if(id2=='phone-amount')
+      //    {
+      //        phoneAmountNumberTotal=1219*phoneQuantityNumberTotal;
+      //    }
+      //    else{
+      //       phoneAmountNumberTotal=59*phoneQuantityNumberTotal;
+      //    }
+         
+        
+      //    document.getElementById(id2).innerText=phoneAmountNumberTotal;
+
+      //    const subtotalAmount=document.getElementById(id3).innerText;
+      //    var subtotalAmountNumber=parseFloat(subtotalAmount);
+
+      //    if(id2=='phone-amount')
+      //    {
+      //       subtotalAmountNumber=subtotalAmountNumber-1219;
+      //    }
+      //    else{
+      //       subtotalAmountNumber=subtotalAmountNumber-59;
+      //    }
+         
+
+      //    document.getElementById(id3).innerText=subtotalAmountNumber;
+      //    document.getElementById(id4).innerText=subtotalAmountNumber;
+      //    }
+      //    else{
+      //       document.getElementById(id1).value=0;
+      //    }
+         
+      // }
+
+     
 
      
 
