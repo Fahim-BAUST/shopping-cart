@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="decrease-quantityPhn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="phone-quantity" type="text" class="form-control text-center" value="1">
+                           <button id="increase-quantityPhn" class="btn btn-default "><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$ <span id="phone-amount">1219</span> </h5>
+                        <img id="phnRemove-btn" src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="decrease-quantityCase" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="case-quantity" type="text" class="form-control text-center" value="1">
+                           <button id="increase-quantityCase" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5 >$<span id="case-amount">59</span></h5>
+                        <img id="caseRemove-btn" src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$ <span id="subtotal-amount">1278</span></h5>
+                        <h5>$ <span id="tax-amount">0</span></h5>
+                        <h5>$ <span id="total-amount">1278</span> </h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+
+
+   <script>
+
+      const plusBtnPhone = document.getElementById("increase-quantityPhn").addEventListener("click",function () {
+         increaseValue("phone-quantity","phone-amount","subtotal-amount","total-amount");
+   
+      })
+
+      const plusBtnCase= document.getElementById("increase-quantityCase").addEventListener("click",function () {
+         increaseValue("case-quantity","case-amount","subtotal-amount","total-amount");
+   
+      })
+
+      const minusBtnPhone = document.getElementById("decrease-quantityPhn").addEventListener("click",function () {
+         decreaseValue("phone-quantity","phone-amount","subtotal-amount","total-amount");
+   
+      })
+      const minusBtnCase = document.getElementById("decrease-quantityCase").addEventListener("click",function () {
+         decreaseValue("case-quantity","case-amount","subtotal-amount","total-amount");
+   
+      })
+
+      const phnRemoveBtn=document.getElementById("phnRemove-btn").addEventListener("click",function () {
+         
+         var phoneAmount=document.getElementById("phone-amount").innerText;
+         phoneAmount=parseFloat(phoneAmount);
+         var subtotal=document.getElementById("subtotal-amount").innerText;
+         subtotal=parseFloat(subtotal);
+         document.getElementById("subtotal-amount").innerText=subtotal-phoneAmount;
+         document.getElementById("total-amount").innerText=subtotal-phoneAmount;
+         document.getElementById("phone-quantity").value=0;
+         document.getElementById("phone-amount").innerText=0;
+
+      })
+
+      const caseRemoveBtn=document.getElementById("caseRemove-btn").addEventListener("click",function () {
+         
+         var phoneAmount=document.getElementById("case-amount").innerText;
+         phoneAmount=parseFloat(phoneAmount);
+         var subtotal=document.getElementById("subtotal-amount").innerText;
+         subtotal=parseFloat(subtotal);
+         document.getElementById("subtotal-amount").innerText=subtotal-phoneAmount;
+         document.getElementById("total-amount").innerText=subtotal-phoneAmount;
+         document.getElementById("case-quantity").value=0;
+         document.getElementById("case-amount").innerText=0;
+
+      })
+
+      function decreaseValue(id1,id2,id3,id4 ) {
+         const phoneQuantity=document.getElementById(id1).value;
+         const phoneQuantityNumber=parseFloat(phoneQuantity);
+         const phoneQuantityNumberTotal=phoneQuantityNumber-1;
+         if(phoneQuantityNumberTotal>=0)
+         {
+         document.getElementById(id1).value=phoneQuantityNumberTotal;
+
+         const phoneAmount=document.getElementById(id2).innerText;
+         const phoneAmountNumber=parseFloat(phoneAmount);
+         var phoneAmountNumberTotal;
+         if(id2=='phone-amount')
+         {
+             phoneAmountNumberTotal=1219*phoneQuantityNumberTotal;
+         }
+         else{
+            phoneAmountNumberTotal=59*phoneQuantityNumberTotal;
+         }
+         
+        
+         document.getElementById(id2).innerText=phoneAmountNumberTotal;
+
+         const subtotalAmount=document.getElementById(id3).innerText;
+         var subtotalAmountNumber=parseFloat(subtotalAmount);
+
+         if(id2=='phone-amount')
+         {
+            subtotalAmountNumber=subtotalAmountNumber-1219;
+         }
+         else{
+            subtotalAmountNumber=subtotalAmountNumber-59;
+         }
+         
+
+         document.getElementById(id3).innerText=subtotalAmountNumber;
+         document.getElementById(id4).innerText=subtotalAmountNumber;
+         }
+         else{
+            document.getElementById(id1).value=0;
+         }
+         
+      }
+
+      function increaseValue(id1,id2,id3,id4 ) {
+         const phoneQuantity=document.getElementById(id1).value;
+         const phoneQuantityNumber=parseFloat(phoneQuantity);
+         const phoneQuantityNumberTotal=phoneQuantityNumber+1;
+         document.getElementById(id1).value=phoneQuantityNumberTotal;
+
+         const phoneAmount=document.getElementById(id2).innerText;
+         const phoneAmountNumber=parseFloat(phoneAmount);
+         var phoneAmountNumberTotal;
+         if(id2=='phone-amount')
+         {
+             phoneAmountNumberTotal=1219*phoneQuantityNumberTotal;
+         }
+         else{
+            phoneAmountNumberTotal=59*phoneQuantityNumberTotal;
+         }
+         
+        
+         document.getElementById(id2).innerText=phoneAmountNumberTotal;
+
+         const subtotalAmount=document.getElementById(id3).innerText;
+         var subtotalAmountNumber=parseFloat(subtotalAmount);
+
+         if(id2=='phone-amount')
+         {
+            subtotalAmountNumber=subtotalAmountNumber+1219;
+         }
+         else{
+            subtotalAmountNumber=subtotalAmountNumber+59;
+         }
+         
+
+         document.getElementById(id3).innerText=subtotalAmountNumber;
+         document.getElementById(id4).innerText=subtotalAmountNumber;
+         
+      }
+
+   </script>
+</body>
+
+</html>
